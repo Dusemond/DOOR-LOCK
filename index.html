@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Emergency Door Release</title>
+    <style media="screen">
+
+        body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        font-family: monospace;
+        background-color: #181C18;
+        color: #00A900;
+        font-size: 1.5em;
+      }
+
+
+
+
+      input {
+        margin: 5px;
+        background-color: #181C18;
+        color: #00A900;
+        border: solid #00A900;
+        padding: 1px;
+      }
+
+      button {
+        width: 100px;
+        background-color: #00A900;
+        border: none;
+        font-family: monospace;
+      }
+
+      .password {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin: 3%;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+
+      }
+
+      .padlock {
+        width: 80px;
+        margin: 0 40px;
+      }
+
+
+      #unlock-status, #password-form {
+        min-width: 500px;
+        border: solid #00A900;
+        margin: 20px;
+        padding: 15px;
+      }
+
+      #status-bar {
+        height: 50px;
+      }
+
+      #header {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+      }
+
+      #intro {
+        text-align: center;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id='header'>
+      <img class="padlock" src="padlock.png" alt="">
+      <h1>DOOR UNLOCK MODULE</h1>
+      <img class="padlock" src="padlock.png" alt="">
+    </div>
+    <p id="intro">PLEASE ENTER THE PASSWORDS. <br>
+      ALL PASSWORDS MUST BE ENTERED IN ALL CAPS WITHOUT SPACES.</p>
+<div class="row">
+
+<div id="password-form">
+
+  <form id="entry1" class="password" action="" onsubmit="return false">
+    <input name="input1" id="input1"  type="text" placeholder="WHAT IS MY NAME?">
+    <button id="button1" type="submit">ENTER PASSWORD</button>
+  </form>
+
+  <form id="entry2" class="password" action="" onsubmit="return false">
+    <input name="input2" id="input2"  type="text" placeholder="CHEMISTRY 101">
+    <button id="button2" type="submit">ENTER PASSWORD</button>
+  </form>
+
+  <form id="entry3" class="password" action="" onsubmit="return false">
+    <input name="input3" id="input3"  type="text" placeholder="PIN CODE">
+    <button id="button3" type="submit">ENTER PASSWORD</button>
+  </form>
+
+  <form id="entry4" class="password" action="" onsubmit="return false">
+    <input name="input4" id="input4"  type="text" placeholder="PERSONAL THOUGHTS">
+    <button id="button4" type="submit">ENTER PASSWORD</button>
+  </form>
+
+  <form id="entry5" class="password" action="" onsubmit="return false">
+    <input name="input5" id="input5"  type="text" placeholder="SECRET CODE">
+    <button id="button5" type="submit">ENTER PASSWORD</button>
+  </form>
+
+</div>
+  <div id="unlock-status">
+    <p> INFO: <span id='info'>EXPERIMENT IN PROGRESS...</span></p>
+    <p>DOOR STATUS:</p>
+    <h5 hidden id="stage1">DOOR UNLOCK STAGE 1/5 COMPLETE</h5>
+    <h5 hidden id="stage2">DOOR UNLOCK STAGE 2/5 COMPLETE</h5>
+    <h5 hidden id="stage3">DOOR UNLOCK STAGE 3/5 COMPLETE</h5>
+    <h5 hidden id="stage4">DOOR UNLOCK STAGE 4/5 COMPLETE</h5>
+    <h5 hidden id="stage5">DOOR UNLOCK STAGE 5/5 COMPLETE</h5>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  const info = document.getElementById('info');
+  const bar = document.getElementById('status-bar');
+  let barStatus = 0;
+
+  function check1(){
+    const entry1 = document.getElementById('entry1');
+    const input1 = document.getElementById('input1').value;
+    const stage1 = document.getElementById('stage1');
+
+      if (input1 === "CAMILLANIENTES") {
+        stage1.hidden = false;
+        info.innerHTML = "PASSWORD 1 CORRECT";
+        barStatus++
+        statusUpdater();
+        console.log(barStatus);
+      } else {
+        entry1.reset();
+        info.innerHTML = "PASSWORD 1 INCORRECT";
+      }
+    }
+
+  function check2(){
+      const entry2 = document.getElementById('entry2');
+      const input2 = document.getElementById('input2').value;
+      const stage2 = document.getElementById('stage2');
+
+        if (input2 === "KEEPLOOKING") {
+          stage2.hidden = false;
+          info.innerHTML = "PASSWORD 2 CORRECT";
+        } else {
+          entry2.reset();
+          info.innerHTML = "PASSWORD 2 INCORRECT";
+        }
+      }
+
+  function check3(){
+        const entry3 = document.getElementById('entry3');
+        const input3 = document.getElementById('input3').value;
+        const stage3 = document.getElementById('stage3');
+        console.log(input3);
+          if (input3 === "2450") {
+            stage3.hidden = false;
+            info.innerHTML = "PASSWORD 3 CORRECT";
+          } else {
+            entry3.reset();
+            info.innerHTML = "PASSWORD 3 INCORRECT";
+          }
+        }
+
+  function check4(){
+    const entry4 = document.getElementById('entry4');
+    const input4 = document.getElementById('input4').value;
+    const stage4 = document.getElementById('stage4');
+
+      if (input4 === "UNLOCKOXYGEN") {
+        stage4.hidden = false;
+        info.innerHTML = "PASSWORD 4 CORRECT";
+      } else {
+        entry4.reset();
+        info.innerHTML = "PASSWORD 4 INCORRECT";
+      }
+    }
+
+  function check5(){
+    const entry5 = document.getElementById('entry5');
+    const input5 = document.getElementById('input5').value;
+    const stage5 = document.getElementById('stage5');
+
+      if (input5 === "THECODEISOPENUP") {
+        stage5.hidden = false;
+        info.innerHTML = "PASSWORD 5 CORRECT";
+      } else {
+        entry5.reset();
+        info.innerHTML = "PASSWORD 5 INCORRECT";
+      }
+    }
+
+
+
+  const button1 = document.getElementById('button1');
+  button1.onclick = check1;
+
+  const button2 = document.getElementById('button2');
+  button2.onclick = check2;
+
+  const button3 = document.getElementById('button3');
+  button3.onclick = check3;
+
+  const button4 = document.getElementById('button4');
+  button4.onclick = check4;
+
+  const button5 = document.getElementById('button5');
+  button5.onclick = check5;
+
+</script>
+  </body>
+</html>
