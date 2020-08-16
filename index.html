@@ -81,13 +81,13 @@
   </head>
   <body>
     <div id='header'>
-      <img class="padlock" src="https://github.com/Dusemond/DOOR-LOCK/blob/master/padlock.png?raw=true" alt="">
+      <img class="padlock" src="padlock.png" alt="">
       <h1>DOOR UNLOCK MODULE</h1>
-      <img class="padlock" src="https://github.com/Dusemond/DOOR-LOCK/blob/master/padlock.png?raw=true" alt="">
+      <img class="padlock" src="padlock.png" alt="">
     </div>
     <p id="intro">PLEASE ENTER THE PASSWORDS. <br>
       ALL PASSWORDS MUST BE ENTERED IN ALL CAPS WITHOUT SPACES.</p>
-<div class="row">
+<div id="container" class="row">
 
 <div id="password-form">
 
@@ -125,15 +125,20 @@
     <h5 hidden id="stage3">DOOR UNLOCK STAGE 3/5 COMPLETE</h5>
     <h5 hidden id="stage4">DOOR UNLOCK STAGE 4/5 COMPLETE</h5>
     <h5 hidden id="stage5">DOOR UNLOCK STAGE 5/5 COMPLETE</h5>
-
   </div>
+</div>
+
+<div id="winScreen">
+  <h1>ATTENTION: DOOR OPENED</h1>
+
 </div>
 
 <script type="text/javascript">
 
   const info = document.getElementById('info');
   const bar = document.getElementById('status-bar');
-  let barStatus = 0;
+  let progress = 0;
+  const container = document.getElementById('container');
 
   function check1(){
     const entry1 = document.getElementById('entry1');
@@ -143,9 +148,7 @@
       if (input1 === "CAMILLANIENTES") {
         stage1.hidden = false;
         info.innerHTML = "PASSWORD 1 CORRECT";
-        barStatus++
-        statusUpdater();
-        console.log(barStatus);
+        progressCheck()
       } else {
         entry1.reset();
         info.innerHTML = "PASSWORD 1 INCORRECT";
@@ -160,6 +163,7 @@
         if (input2 === "KEEPLOOKING") {
           stage2.hidden = false;
           info.innerHTML = "PASSWORD 2 CORRECT";
+          progressCheck();
         } else {
           entry2.reset();
           info.innerHTML = "PASSWORD 2 INCORRECT";
@@ -170,10 +174,11 @@
         const entry3 = document.getElementById('entry3');
         const input3 = document.getElementById('input3').value;
         const stage3 = document.getElementById('stage3');
-        console.log(input3);
+
           if (input3 === "2450") {
             stage3.hidden = false;
             info.innerHTML = "PASSWORD 3 CORRECT";
+            progressCheck();
           } else {
             entry3.reset();
             info.innerHTML = "PASSWORD 3 INCORRECT";
@@ -188,6 +193,7 @@
       if (input4 === "UNLOCKOXYGEN") {
         stage4.hidden = false;
         info.innerHTML = "PASSWORD 4 CORRECT";
+        progressCheck();
       } else {
         entry4.reset();
         info.innerHTML = "PASSWORD 4 INCORRECT";
@@ -202,12 +208,21 @@
       if (input5 === "THECODEISOPENUP") {
         stage5.hidden = false;
         info.innerHTML = "PASSWORD 5 CORRECT";
+        progressCheck();
       } else {
         entry5.reset();
         info.innerHTML = "PASSWORD 5 INCORRECT";
       }
     }
 
+  function progressCheck(){
+    progress++
+
+    if (progress === 5) {
+      container.style.display = "none";
+      winScreen.style.display= "flex"
+    }
+  }
 
 
   const button1 = document.getElementById('button1');
