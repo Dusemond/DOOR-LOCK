@@ -17,9 +17,6 @@
         font-size: 1.5em;
       }
 
-
-
-
       input {
         margin: 5px;
         background-color: #181C18;
@@ -76,9 +73,11 @@
       #intro {
         text-align: center;
       }
-      
+
       #winScreen {
-       display: none; 
+        display: none;
+        flex-direction: column;
+        text-align: center;
       }
 
     </style>
@@ -133,8 +132,8 @@
 </div>
 
 <div id="winScreen">
-  <h1>ATTENTION: DOOR OPENED</h1>
-
+  <h1>ATTENTION: DOOR UNLOCKED</h1>
+  <h2>EXPERIMENT INTERRUPTED</h2>
 </div>
 
 <script type="text/javascript">
@@ -143,17 +142,27 @@
   const bar = document.getElementById('status-bar');
   let progress = 0;
   const container = document.getElementById('container');
+  const intro = document.getElementById('intro');
+
+  let submitted1 = false;
+  let submitted2 = false;
+  let submitted3 = false;
+  let submitted4 = false;
+  let submitted5 = false;
 
   function check1(){
     const entry1 = document.getElementById('entry1');
     const input1 = document.getElementById('input1').value;
     const stage1 = document.getElementById('stage1');
 
-      if (input1 === "CAMILLANIENTES") {
+      if (input1 === "CAMILLANIENTES" && submitted1 === false) {
         stage1.hidden = false;
         info.innerHTML = "PASSWORD 1 CORRECT";
+        submitted1 = true;
         progressCheck()
-      } else {
+      } else if (submitted1 === true) {
+        info.innerHTML = "PASSWORD ALREADY SUBMITTED CORRECTLY"
+      } else{
         entry1.reset();
         info.innerHTML = "PASSWORD 1 INCORRECT";
       }
@@ -164,10 +173,13 @@
       const input2 = document.getElementById('input2').value;
       const stage2 = document.getElementById('stage2');
 
-        if (input2 === "KEEPLOOKING") {
+        if (input2 === "KEEPLOOKING" && submitted2 === false) {
           stage2.hidden = false;
           info.innerHTML = "PASSWORD 2 CORRECT";
+          submitted2 = true;
           progressCheck();
+        } else if (submitted2 === true) {
+          info.innerHTML = "PASSWORD ALREADY SUBMITTED CORRECTLY"
         } else {
           entry2.reset();
           info.innerHTML = "PASSWORD 2 INCORRECT";
@@ -179,10 +191,13 @@
         const input3 = document.getElementById('input3').value;
         const stage3 = document.getElementById('stage3');
 
-          if (input3 === "2450") {
+          if (input3 === "2450" && submitted3 === false) {
             stage3.hidden = false;
             info.innerHTML = "PASSWORD 3 CORRECT";
+            submitted3 = true;
             progressCheck();
+          } else if (submitted3 === true) {
+            info.innerHTML = "PASSWORD ALREADY SUBMITTED CORRECTLY"
           } else {
             entry3.reset();
             info.innerHTML = "PASSWORD 3 INCORRECT";
@@ -194,10 +209,13 @@
     const input4 = document.getElementById('input4').value;
     const stage4 = document.getElementById('stage4');
 
-      if (input4 === "UNLOCKOXYGEN") {
+      if (input4 === "UNLOCKOXYGEN" && submitted4 === false) {
         stage4.hidden = false;
         info.innerHTML = "PASSWORD 4 CORRECT";
+        submitted4 = true;
         progressCheck();
+      } else if (submitted4 === true) {
+        info.innerHTML = "PASSWORD ALREADY SUBMITTED CORRECTLY"
       } else {
         entry4.reset();
         info.innerHTML = "PASSWORD 4 INCORRECT";
@@ -209,10 +227,14 @@
     const input5 = document.getElementById('input5').value;
     const stage5 = document.getElementById('stage5');
 
-      if (input5 === "THECODEISOPENUP") {
+      if (input5 === "THECODEISOPENUP" && submitted5 === false) {
+        input5.submitted = true;
         stage5.hidden = false;
         info.innerHTML = "PASSWORD 5 CORRECT";
+        submitted5 = true;
         progressCheck();
+      } else if (submitted5 === true) {
+        info.innerHTML = "PASSWORD ALREADY SUBMITTED CORRECTLY"
       } else {
         entry5.reset();
         info.innerHTML = "PASSWORD 5 INCORRECT";
@@ -224,7 +246,9 @@
 
     if (progress === 5) {
       container.style.display = "none";
-      winScreen.style.display= "flex"
+      intro.style.display = "none";
+      winScreen.style.display= "flex";
+
     }
   }
 
