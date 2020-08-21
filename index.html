@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>Emergency Door Release</title>
-    <style media="screen">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <style>
 
         body {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         font-family: monospace;
         background-color: #181C18;
         color: #00A900;
@@ -37,14 +37,12 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-
         margin: 3%;
       }
 
       .row {
         display: flex;
         flex-direction: row;
-
       }
 
       .padlock {
@@ -80,6 +78,11 @@
         text-align: center;
       }
 
+      @media screen and (max-width: 1024px) {
+        .row {
+          flex-direction: column-reverse;
+        }
+      }
     </style>
   </head>
   <body>
